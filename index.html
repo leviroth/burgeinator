@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>A new Burgeinator</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+		<script>
+		$(document).ready(function(){
+
+			String.prototype.pluralize = function(count, plural){
+				if (plural == null)
+					plural = this + 's';
+
+				return count == 1 ? this : plural;
+			}
+
+			$("#burgeinate").click(function(){
+				sentences = $("#essay").val().split(/[.!?]\s/gi);
+
+				var verdict = $('<ul/>')
+				var numWrong = 0;
+				
+				for (i = 0; i < sentences.length; ++i)
+				{
+					ourLength = sentences[i].split(' ').length;
+					if (ourLength > 16)
+					{
+						//$("<em/>").text(ourLength + "words")
+						$("<li/>").text(ourLength + " words: \"" + sentences[i] + "\"").appendTo(verdict);
+						++numWrong;
+					}
+				}
+
+				if (numWrong > 0)
+				{
+					$("#output").empty().append("We found " + numWrong + " " + "sentence".pluralize(numWrong) + " over 16 words:");
+					$("#output").append(verdict);
+				}
+				else
+				{
+					$("#output").empty().append("Congratulations - we couldn't find anything wrong.")
+				}
+			});
+		});
+		</script>
+	</head>
+
+	<body>
+		<p>Copy and paste your essay below, then click the button. It's definitely possible that we overlook something; 
+			in particular, something like "W.V.O. Quine." shows up as two sentences of one word each.</p>
+
+		<div><textarea style="font-family:sans-serif;width:700px;height:300px" id="essay"></textarea></div>
+		<div><button type="button" id="burgeinate">Burgeinate!</button></div>
+
+		<p id="output"></p>
+	</body>
+</html>
