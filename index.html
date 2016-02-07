@@ -24,7 +24,6 @@
 					ourLength = sentences[i].split(' ').length;
 					if (ourLength > 16)
 					{
-						//$("<em/>").text(ourLength + "words")
 						$("<li/>").text(ourLength + " words: \"" + sentences[i] + "\"").appendTo(verdict);
 						++numWrong;
 					}
