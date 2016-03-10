@@ -14,7 +14,7 @@
 			}
 
 			$("#burgeinate").click(function(){
-				sentences = $("#essay").val().split(/[.!?]\s/gi);
+				sentences = $("#essay").val().split(/[.!?]"?\s/gi);
 
 				var verdict = $('<ul/>')
 				var numWrong = 0;
