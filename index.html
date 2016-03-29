@@ -1,55 +1,72 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>A new Burgeinator</title>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-		<script>
-		$(document).ready(function(){
+    <head>
+        <title>A new Burgeinator</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        <script>
+        $(document).ready(function(){
 
-			String.prototype.pluralize = function(count, plural){
-				if (plural == null)
-					plural = this + 's';
+            String.prototype.pluralize = function(count, plural){
+                if (plural == null)
+                    plural = this + 's';
 
-				return count == 1 ? this : plural;
-			}
+                return count == 1 ? this : plural;
+            }
 
-			$("#burgeinate").click(function(){
-				sentences = $("#essay").val().split(/[.!?]["'\u2019\u201D]?\s/gi);
+            $("#burgeinate").click(function(){
+                sentences = $("#essay").val().split(/[.!?]["'\u2019\u201D]?\s/gi);
 
-				var verdict = $('<ul/>')
-				var numWrong = 0;
-				
-				for (i = 0; i < sentences.length; ++i)
-				{
-					ourLength = sentences[i].split(' ').length;
-					if (ourLength > 16)
-					{
-						$("<li/>").text(ourLength + " words: \"" + sentences[i] + "\"").appendTo(verdict);
-						++numWrong;
-					}
-				}
+                var verdict = $('<dl/>');
+                verdict.addClass("dl-horizontal");
+                var numWrong = 0;
+                
+                for (i = 0; i < sentences.length; ++i)
+                {
+                    ourLength = sentences[i].split(' ').length;
+                    if (ourLength > 16)
+                    {
+                        $("<dt/>").text(ourLength + " words").appendTo(verdict);
+                        $("<dd/>").text(sentences[i]).appendTo(verdict);
+                        ++numWrong;
+                    }
+                }
 
-				if (numWrong > 0)
-				{
-					$("#output").empty().append("We found " + numWrong + " " + "sentence".pluralize(numWrong) + " over 16 words:");
-					$("#output").append(verdict);
-				}
-				else
-				{
-					$("#output").empty().append("Congratulations - we couldn't find anything wrong.")
-				}
-			});
-		});
-		</script>
-	</head>
+                if (numWrong > 0)
+                {
+                    $("#output").empty();
+                    $("<h4/>").text("We found " + numWrong + " " + "sentence".pluralize(numWrong) 
+                            + " over 16 words:").appendTo($("#output"));
+                    $("#output").append(verdict);
+                }
+                else
+                {
+                    $("#output").empty().append($("<h4/>").text("Congratulations - we couldn't find anything wrong."))
+                }
+            });
+        });
+        </script>
+    </head>
 
-	<body>
-		<p>Copy and paste your essay below, then click the button. It's definitely possible that we overlook something; 
-			in particular, something like "W.V.O. Quine." shows up as two sentences of one word each.</p>
+    <body>
+        <div class="container">
+            <h1>The Burgeinator</h1>
+            <p>
+                Copy and paste your essay below, then click the button. It's definitely possible that we 
+                overlook something; 
+                in particular, something like "W.V.O. Quine." shows up as two sentences of one word each.
+            </p>
 
-		<div><textarea style="font-family:sans-serif;width:700px;height:300px" id="essay"></textarea></div>
-		<div><button type="button" id="burgeinate">Burgeinate!</button></div>
+            <form action="javascript:void(0)">
+                <div class="form-group">
+                    <textarea style="font-family:sans-serif" rows="10" class="form-control" id="essay"></textarea>
+                </div>
+                <div class="form-group"><button type="submit" class="btn btn-default" id="burgeinate">Burgeinate!</button></div>
+            </form>
 
-		<p id="output"></p>
-	</body>
+            <p id="output" style="padding-top:25px"></p>
+        </div>
+    </body>
 </html>
