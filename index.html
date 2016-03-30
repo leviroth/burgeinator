@@ -19,6 +19,10 @@
             $("#burgeinate").click(function(){
                 sentences = $("#essay").val().split(/[.!?]["'\u2019\u201D]?\s/gi);
 
+                limit = $("#limit").val();
+
+                // TODO: check of numeric
+
                 var verdict = $('<dl/>');
                 verdict.addClass("dl-horizontal");
                 var numWrong = 0;
@@ -26,7 +30,7 @@
                 for (i = 0; i < sentences.length; ++i)
                 {
                     ourLength = sentences[i].split(' ').length;
-                    if (ourLength > 16)
+                    if (ourLength > limit)
                     {
                         $("<dt/>").text(ourLength + " words").appendTo(verdict);
                         $("<dd/>").text(sentences[i]).appendTo(verdict);
@@ -38,7 +42,7 @@
                 {
                     $("#output").empty();
                     $("<h4/>").text("We found " + numWrong + " " + "sentence".pluralize(numWrong) 
-                            + " over 16 words:").appendTo($("#output"));
+                            + " over " + limit + " words:").appendTo($("#output"));
                     $("#output").append(verdict);
                 }
                 else
@@ -49,7 +53,7 @@
         });
         </script>
     </head>
-
+    <!-- TODO labels -->
     <body>
         <div class="container">
             <h1>The Burgeinator</h1>
@@ -62,6 +66,10 @@
             <form action="javascript:void(0)">
                 <div class="form-group">
                     <textarea style="font-family:sans-serif" rows="10" class="form-control" id="essay"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="limit">Word limit:</label>
+                    <input type="text" class="form-control" id="limit" value="16"/>
                 </div>
                 <div class="form-group"><button type="submit" class="btn btn-default" id="burgeinate">Burgeinate!</button></div>
             </form>
