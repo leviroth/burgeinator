@@ -17,11 +17,21 @@
             }
 
             $("#burgeinate").click(function(){
-                sentences = $("#essay").val().split(/[.!?]["'\u2019\u201D]?\s/gi);
+                $("#output").empty();
 
                 limit = $("#limit").val();
+                if (!$.isNumeric(limit))
+                {
+                    //$("#limit").notify("We need a number here.");
+                    $("#error").text("We need a number here.");
+                    return;
+                }
+                else
+                {
+                    $("#error").empty();
+                }
 
-                // TODO: check of numeric
+                sentences = $("#essay").val().split(/[.!?]["'\u2019\u201D]?\s/gi);
 
                 var verdict = $('<dl/>');
                 verdict.addClass("dl-horizontal");
@@ -40,14 +50,13 @@
 
                 if (numWrong > 0)
                 {
-                    $("#output").empty();
                     $("<h4/>").text("We found " + numWrong + " " + "sentence".pluralize(numWrong) 
                             + " over " + limit + " words:").appendTo($("#output"));
                     $("#output").append(verdict);
                 }
                 else
                 {
-                    $("#output").empty().append($("<h4/>").text("Congratulations - we couldn't find anything wrong."))
+                    $("#output").append($("<h4/>").text("Congratulations - we couldn't find anything wrong."))
                 }
             });
         });
@@ -70,6 +79,7 @@
                 <div class="form-group">
                     <label for="limit">Word limit:</label>
                     <input type="text" class="form-control" id="limit" value="16"/>
+                    <div id="error" style="color:#f00"></div>
                 </div>
                 <div class="form-group"><button type="submit" class="btn btn-default" id="burgeinate">Burgeinate!</button></div>
             </form>
