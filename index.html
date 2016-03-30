@@ -36,7 +36,7 @@
                 var verdict = $('<dl/>');
                 verdict.addClass("dl-horizontal");
                 var numWrong = 0;
-                
+
                 for (i = 0; i < sentences.length; ++i)
                 {
                     ourLength = sentences[i].split(' ').length;
@@ -50,7 +50,7 @@
 
                 if (numWrong > 0)
                 {
-                    $("<h4/>").text("We found " + numWrong + " " + "sentence".pluralize(numWrong) 
+                    $("<h4/>").text("We found " + numWrong + " " + "sentence".pluralize(numWrong)
                             + " over " + limit + " words:").appendTo($("#output"));
                     $("#output").append(verdict);
                 }
@@ -66,8 +66,8 @@
         <div class="container">
             <h1>The Burgeinator</h1>
             <p>
-                Copy and paste your essay below, then click the button. It's definitely possible that we 
-                overlook something; 
+                Copy and paste your essay below, then click the button. It's definitely possible that we
+                overlook something;
                 in particular, something like "W.V.O. Quine." shows up as two sentences of one word each.
             </p>
 
