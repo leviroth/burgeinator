@@ -9,8 +9,15 @@
     <script src="../src/js/burgeinator.js"></script>
 
     <script>
-    QUnit.test("Processing functionality", function( assert ) {
-        assert.equal(Burgeinator.verify("foo",16), 0, "Too short");
+    QUnit.test("Burgeinator.verify", function( assert ) {
+        String.prototype.repeat = function(times) {
+            return new Array(times + 1).join(this);
+        }
+        longsentence = "Foo ".repeat(20);
+
+        assert.equal(Burgeinator.verify("foo", 16).length, 0, "One short sentence");
+        assert.equal(Burgeinator.verify("Foo. Bar.", 16).length, 0, "Two short sentences");
+        assert.equal(Burgeinator.verify(longsentence, 16).length, 1, "One long sentence");
     });
     </script>
   </head>
