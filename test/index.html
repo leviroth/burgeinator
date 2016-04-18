@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Burgeinator test suite</title>
+
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-1.23.1.css">
+    <script src="https://code.jquery.com/qunit/qunit-1.23.1.js"></script>
+    <script src="../src/js/burgeinator.js"></script>
+
+    <script>
+    QUnit.test("Processing functionality", function( assert ) {
+        assert.equal(Burgeinator.verify("foo",16), 0, "Too short");
+    });
+    </script>
+  </head>
+<body>
+
+<div id="qunit"></div>
+
+</body>
+</html>
