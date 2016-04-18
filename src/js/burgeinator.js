@@ -39,8 +39,6 @@ var Burgeinator = {
 
         violators = Burgeinator.verify($("#essay").val(), limit);
 
-        console.log("foo");
-
         var numWrong = violators.length;
 
         if (numWrong == 0)

@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
         <script src="js/burgeinator.js"></script>
+        <link rel="stylesheet" href="css/burgeinator.css">
         <script>
         $(document).ready(function(){
             $("#burgeinate").click(Burgeinator.update);
@@ -26,17 +27,17 @@
             <form action="javascript:void(0)">
                 <div class="form-group">
                     <label for="essay">Essay:</label>
-                    <textarea style="font-family:sans-serif" rows="10" class="form-control" id="essay"></textarea>
+                    <textarea rows="10" class="form-control" id="essay"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="limit">Word limit:</label>
                     <input type="text" class="form-control" id="limit" value="16"/>
-                    <div id="error" style="color:#f00"></div>
+                    <div id="error"></div>
                 </div>
                 <div class="form-group"><button type="submit" class="btn btn-default" id="burgeinate">Burgeinate!</button></div>
             </form>
 
-            <p id="output" style="padding-top:25px"></p>
+            <p id="output"></p>
         </div>
     </body>
 </html>
