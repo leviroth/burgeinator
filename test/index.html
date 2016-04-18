@@ -13,10 +13,23 @@
         String.prototype.repeat = function(times) {
             return new Array(times + 1).join(this);
         }
-        longsentence = "Foo ".repeat(20);
 
-        assert.equal(Burgeinator.verify("foo", 16).length, 0, "One short sentence");
-        assert.equal(Burgeinator.verify("Foo. Bar.", 16).length, 0, "Two short sentences");
+        longsentence = "Foo ".repeat(20);
+        shortsentence = "Foo ".repeat(10);
+
+        assert.equal(Burgeinator.verify(shortsentence, 16).length, 0, "One short sentence");
+        assert.equal(Burgeinator.verify(shortsentence.concat(". ", shortsentence), 16).length,
+            0, "Two short sentences - period");
+        assert.equal(Burgeinator.verify(shortsentence.concat("! ", shortsentence), 16).length,
+            0, "Two short sentences - exclamation");
+        assert.equal(Burgeinator.verify(shortsentence.concat("? ", shortsentence), 16).length,
+            0, "Two short sentences - question mark");
+        assert.equal(Burgeinator.verify(shortsentence.concat(".\")\' ", shortsentence), 16).length,
+            0, "Two short sentences - special characters");
+        assert.equal(Burgeinator.verify(shortsentence.concat(".", shortsentence), 16).length,
+            1, "Two short sentences - no space after period");
+        assert.equal(Burgeinator.verify(shortsentence.concat(",\" ", shortsentence), 16).length,
+            1, "Two short sentences - quote with no period");
         assert.equal(Burgeinator.verify(longsentence, 16).length, 1, "One long sentence");
     });
     </script>
