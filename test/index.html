@@ -32,8 +32,8 @@
             1, "Two short sentences - quote with no period");
         assert.equal(Burgeinator.verify(shortsentence.concat("\". ", shortsentence), 16).length,
             0, "Two short sentences - quote before period");
-        assert.equal(Burgeinator.verify(shortsentence.concat(".” ", shortsentence, ".’ ", 
-                        shortsentence), 16).length, 
+        assert.equal(Burgeinator.verify(shortsentence.concat(".” ", shortsentence, ".’ ",
+                        shortsentence), 16).length,
             0, "Three short sentences - curly quotes");
         assert.equal(Burgeinator.verify(longsentence, 16).length, 1, "One long sentence");
     });
